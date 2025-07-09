@@ -42,11 +42,7 @@ def analyze_csv():
         except Exception as e:
             return jsonify({"error": f"Failed to parse CSV: {str(e)}"}), 400
 
-        return jsonify({
-            "message": "CSV Loaded Successfully",
-            "columns": list(df.columns),
-            "sample_data": df.head(5).to_dict(orient='records')  # show first 5 rows
-        }), 200
+        return jsonify({"message": "CSV Loaded Successfully","columns": list(df.columns) }), 200
 
         # Step 4: Calculate metrics
         try:
