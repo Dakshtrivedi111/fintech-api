@@ -39,13 +39,18 @@ def analyze_csv():
 
         # Step 5: Format response
         try:
-             summary = f"""Total rows: {total_rows}\nTotal Revenue: ${total_revenue:,.2f}\nTop Region by Revenue: {top_region}\nTop Product by Revenue: {top_product}\nAverage Unit Price: ${avg_unit_price:.2f}\n\nDaily Revenue:\n{daily_revenue.to_string(index=False)}"""except Exception as e:
+             summary = f"""Total rows: {total_rows}\nTotal Revenue: ${total_revenue}\nTop Region by Revenue: {top_region}\nTop Product by Revenue: {top_product}\nAverage Unit Price: ${avg_unit_price}\n\nDaily Revenue:\n{daily_revenue.to_string(index=False)}"""
         except Exception as e:
+            
             return jsonify({"error": f"Error formatting response: {str(e)}"}), 500
+        
 
         return jsonify({"metrics_summary": summary})
 
     except Exception as e:
+        
+
+
         # Fallback for any unexpected errors
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
