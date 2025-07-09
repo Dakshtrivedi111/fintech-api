@@ -43,24 +43,29 @@ def analyze_csv():
 
         # Step 4: Calculate metrics
         try:
-            total_rows = len(df)
-            total_revenue = df['Revenue'].sum()
-            top_region = df.groupby('Region')['Revenue'].sum().idxmax()
-            top_product = df.groupby('Product')['Revenue'].sum().idxmax()
-            avg_unit_price = df['Unit_Price'].mean()
-            daily_revenue = df.groupby('Date')['Revenue'].sum().reset_index()
+            total_loans = len(df)
+            approved_rate = (df['Loan_Status'] == 'Approved').mean()
+            rejected_rate = (df['Loan_Status'] == 'Rejected').mean()
+            default_rate = (df['Defaulted'] == 'Yes').mean()
+            avg_loan_amount = df['Loan_Amount'].mean()
+            avg_interest = df['Interest_Rate'].mean()
+            top_loan_type = df['Loan_Type'].value_counts().idxmax()
+            top_region = df['Region'].value_counts().idxmax()
         except Exception as e:
             return jsonify({"error": f"Error during metric calculation: {str(e)}"}), 500
 
         # Step 5: Format results
         try:
-            summary = f"""Total rows: {total_rows}
-Total Revenue: ${total_revenue:,.2f}
-Top Region by Revenue: {top_region}
-Top Product by Revenue: {top_product}
-Average Unit Price: ${avg_unit_price:.2f}
-Daily Revenue:
-{daily_revenue.to_string(index=False)}"""
+            summary = {
+    "Total Loans": total_loans,
+    "Approval Rate (%)": round(approved_rate * 100, 2),
+    "Rejection Rate (%)": round(rejected_rate * 100, 2),
+    "Default Rate (%)": round(default_rate * 100, 2),
+    "Average Loan Amount": round(avg_loan_amount, 2),
+    "Average Interest Rate (%)": round(avg_interest, 2),
+    "Most Common Loan Type": top_loan_type,
+    "Top Region": top_region
+}
         except Exception as e:
             return jsonify({"error": f"Error formatting summary: {str(e)}"}), 500
 
