@@ -44,7 +44,8 @@ def analyze_csv():
 
         
 
-        return jsonify({"message": "CSV Loaded Successfully","columns": list(df.columns) }), 400
+        return jsonify({"message": "CSV Loaded Successfully"})
+        return jsonify({"columns": list(df.columns) })
 
         
 
