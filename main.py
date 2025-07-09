@@ -1,3 +1,9 @@
+from flask import Flask, request, jsonify
+import pandas as pd
+from io import StringIO
+
+app = Flask(__name__)
+
 @app.route('/analyze', methods=['POST'])
 def analyze():
     # Check if 'data' file was uploaded
@@ -38,3 +44,7 @@ Daily Revenue:
     except Exception as e:
         # Log actual error message (can log it somewhere in production)
         return jsonify({"error": str(e)}), 500
+
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=8080)
