@@ -27,6 +27,7 @@ def analyze_csv():
                 content = response.content.decode('latin-1')
             except Exception as e:
                 return jsonify({"error": f"Failed to decode file: {str(e)}"}), 400
+                
 
         # Step 3: Read into pandas
         try:
@@ -40,6 +41,8 @@ def analyze_csv():
             )
         except Exception as e:
             return jsonify({"error": f"Failed to parse CSV: {str(e)}"}), 400
+
+        print(df.head())
 
         # Step 4: Calculate metrics
         try:
