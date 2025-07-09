@@ -42,37 +42,11 @@ def analyze_csv():
         except Exception as e:
             return jsonify({"error": f"Failed to parse CSV: {str(e)}"}), 400
 
-        return jsonify({"message": "CSV Loaded Successfully","columns": list(df.columns) }), 200
+        
 
-        # Step 4: Calculate metrics
-        try:
-            total_loans = len(df)
-            approved_rate = (df['Loan_Status'] == 'Approved').mean()
-            rejected_rate = (df['Loan_Status'] == 'Rejected').mean()
-            default_rate = (df['Defaulted'] == 'Yes').mean()
-            avg_loan_amount = df['Loan_Amount'].mean()
-            avg_interest = df['Interest_Rate'].mean()
-            top_loan_type = df['Loan_Type'].value_counts().idxmax()
-            top_region = df['Region'].value_counts().idxmax()
-        except Exception as e:
-            return jsonify({"error": f"Error during metric calculation: {str(e)}"}), 500
+        return jsonify({"message": "CSV Loaded Successfully","columns": list(df.columns) }), 400
 
-        # Step 5: Format results
-        try:
-            summary = {
-    "Total Loans": total_loans,
-    "Approval Rate (%)": round(approved_rate * 100, 2),
-    "Rejection Rate (%)": round(rejected_rate * 100, 2),
-    "Default Rate (%)": round(default_rate * 100, 2),
-    "Average Loan Amount": round(avg_loan_amount, 2),
-    "Average Interest Rate (%)": round(avg_interest, 2),
-    "Most Common Loan Type": top_loan_type,
-    "Top Region": top_region
-}
-        except Exception as e:
-            return jsonify({"error": f"Error formatting summary: {str(e)}"}), 500
-
-        return jsonify({"metrics_summary": summary})
+        
 
     except Exception as e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
