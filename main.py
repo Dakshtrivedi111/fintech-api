@@ -42,9 +42,7 @@ def analyze_csv():
         except Exception as e:
             return jsonify({"error": f"Failed to parse CSV: {str(e)}"}), 400
 
-        
-
-        return jsonify({"message": "CSV Loaded Successfully"})
+    
         return jsonify({"columns": list(df.columns) })
 
         
