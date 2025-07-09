@@ -27,12 +27,13 @@ def analyze_csv():
 
         # Step 4: Perform metrics calculation
         try:
+            
             total_rows = len(df)
-    total_revenue = df['Revenue'].sum()
-    top_region = df.groupby('Region')['Revenue'].sum().idxmax()
-    top_product = df.groupby('Product')['Revenue'].sum().idxmax()
-    avg_unit_price = df['Unit_Price'].mean()
-    daily_revenue = df.groupby('Date')['Revenue'].sum().reset_index()
+            total_revenue = df['Revenue'].sum()
+            top_region = df.groupby('Region')['Revenue'].sum().idxmax()
+            top_product = df.groupby('Product')['Revenue'].sum().idxmax()
+            avg_unit_price = df['Unit_Price'].mean()
+            daily_revenue = df.groupby('Date')['Revenue'].sum().reset_index()
         except Exception as e:
             return jsonify({"error": f"Error during data aggregation: {str(e)}"}), 500
 
