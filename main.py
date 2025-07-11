@@ -3,7 +3,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-@app.route('/analyze', methods=['POST'])
+@app.route('/analyze-loans', methods=['POST'])
 def analyze_loans():
     try:
         # Parse JSON input
