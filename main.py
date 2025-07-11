@@ -16,15 +16,15 @@ def analyze_loans():
         # Convert to DataFrame
         df = pd.DataFrame(data)
 
-        # Check required columns
-        #required_cols = ['customer_ID','Loan_Amount','Loan_Status','Interest_Rate','Tenure_Months','Monthly_Income','EMI','Defaulted','Region','Loan_Type','Disbursal_Date']
-        #if not all(col in df.columns for col in required_cols):
-            #return jsonify({"error": "Missing required columns in data"}), 400
+        Check required columns
+        required_cols = ['Customer_ID','Loan_Amount','Loan_Status','Interest_Rate','Tenure_Months','Monthly_Income','EMI','Defaulted','Region','Loan_Type','Disbursal_Date']
+        if not all(col in df.columns for col in required_cols):
+            return jsonify({"error": "Missing required columns in data"}), 400
 
         # Convert to numeric and date
         df['Loan_Amount'] = pd.to_numeric(df['Loan_Amount'], errors='coerce')
         df['Interest_Rate'] = pd.to_numeric(df['Interest_Rate'], errors='coerce')
-        df['customer_ID'] = pd.to_numeric(df['customer_ID'], errors='coerce')
+        df['Customer_ID'] = pd.to_numeric(df['Customer_ID'], errors='coerce')
         df['Tenure_Months'] = pd.to_numeric(df['Tenure_Months'], errors='coerce')
         df['Monthly_Income'] = pd.to_numeric(df['Monthly_Income'], errors='coerce')
         df['EMI'] = pd.to_numeric(df['EMI'], errors='coerce')
