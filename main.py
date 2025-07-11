@@ -16,7 +16,7 @@ def analyze_loans():
         # Convert to DataFrame
         df = pd.DataFrame(data)
 
-        Check required columns
+        #Check required columns
         required_cols = ['Customer_ID','Loan_Amount','Loan_Status','Interest_Rate','Tenure_Months','Monthly_Income','EMI','Defaulted','Region','Loan_Type','Disbursal_Date']
         if not all(col in df.columns for col in required_cols):
             return jsonify({"error": "Missing required columns in data"}), 400
