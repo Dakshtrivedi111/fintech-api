@@ -17,9 +17,9 @@ def analyze_loans():
         df = pd.DataFrame(data)
 
         # Check required columns
-        required_cols = ['customer_ID','Loan_Amount','Loan_Status','Interest_Rate','Tenure_Months','Monthly_Income','EMI','Defaulted','Region','Loan_Type','Disbursal_Date']
-        if not all(col in df.columns for col in required_cols):
-            return jsonify({"error": "Missing required columns in data"}), 400
+        #required_cols = ['customer_ID','Loan_Amount','Loan_Status','Interest_Rate','Tenure_Months','Monthly_Income','EMI','Defaulted','Region','Loan_Type','Disbursal_Date']
+        #if not all(col in df.columns for col in required_cols):
+            #return jsonify({"error": "Missing required columns in data"}), 400
 
         # Convert to numeric and date
         df['Loan_Amount'] = pd.to_numeric(df['Loan_Amount'], errors='coerce')
