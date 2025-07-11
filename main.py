@@ -53,7 +53,7 @@ def analyze_loans():
             "Top Region": top_region
         }
 
-        return [{ "json": { "metrics_summary": summary } }]
+        return jsonify({ "metrics_summary": summary })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
