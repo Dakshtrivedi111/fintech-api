@@ -6,12 +6,14 @@ app = Flask(__name__)
 @app.route('/analyze-loans', methods=['POST'])
 def analyze_loans():
     try:
-        # Parse JSON input
+        # Get JSON input
         data = request.get_json()
-        if not data:
-            return jsonify({"error": "No data provided"}), 400
 
-        # Convert list of dicts to DataFrame
+        # Validate input is a list of dicts
+        if not isinstance(data, list):
+            return jsonify({"error": "Expected a list of records (list of dictionaries)"}), 400
+
+        # Convert to DataFrame
         df = pd.DataFrame(data)
 
         # Check required columns
